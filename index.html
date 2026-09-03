@@ -263,6 +263,22 @@
             font-style: italic;
         }
 
+        /* BGM / instrument markings - highlighted badge */
+        .lyrics-text .marking.inst {
+            display: inline-block;
+            color: #fff;
+            background: var(--accent);
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 700;
+            font-style: normal;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin: 6px 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+        }
+
         .no-lyrics-box {
             text-align: center;
             padding: 40px 20px;
@@ -1190,7 +1206,9 @@
                 let html = '';
                 parts.forEach(p => {
                     if (p.startsWith('__MARKING__')) {
-                        html += '<span class="marking">' + escapeHtml(p.replace('__MARKING__','')) + '</span>\n';
+                        const mtext = p.replace('__MARKING__','');
+                        const isInst = /bgm|flute|violin|harmonium|harmoniu|violin|sangitham|sangeetham|music|intro|starting|pitch|start/i.test(mtext);
+                        html += '<span class="marking' + (isInst ? ' inst' : '') + '">' + escapeHtml(mtext) + '</span>\n';
                     } else if (p.trim() === '') {
                         html += '\n';
                     } else {
