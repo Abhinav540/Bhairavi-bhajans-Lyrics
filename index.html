@@ -221,6 +221,28 @@
             letter-spacing: 0.5px;
         }
 
+        .pitch-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 30px;
+            height: 30px;
+            padding: 0 8px;
+            margin-left: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            font-weight: 800;
+            font-size: 0.95em;
+            vertical-align: middle;
+            border: 2px solid #fff;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+        }
+
+        .dark .pitch-badge {
+            border-color: var(--header-bg);
+        }
+
         /* LYRICS PAGE */
         #pageLyrics {
             display: none;
@@ -610,7 +632,9 @@
             },
             {
                 title: "Pambhaganapathi",
-                lyrics: `~BGM - harmonium and violin
+                lyrics: `~Pitch - A
+~Starting - rhythm pad
+~BGM - harmonium and violin
 പമ്പാഗണപതി പാരിൻ്റയധിപതി
 കൊമ്പാർന്നുണരണമൻപിൽ
 തെൻ്റ തുമ്പിൈക്ക ചേർക്കേണം നെഞ്ചിൽ
@@ -621,8 +645,10 @@
 ദുഃഖങ്ങൾ കർപ്പൂരത്തിരിയായ് കത്തുമ്പോൾ
 അയ്യപ്പൻ കളഭച്ചാർത്തണിയാൻ നിൽക്കുമ്പോൾ
 
-~Pitch - A
-~Starting - rhythm pad
+പമ്പാഗണപതി പാരിൻ്റയധിപതി
+കൊമ്പാർന്നുണരണമൻപിൽ
+തെൻ്റ തുമ്പിൈക്ക ചേർക്കേണം നെഞ്ചിൽ
+വിഘ്നങ്ങൾ വിധി പോലെ തീർക്കേണം മുൻപിൽ (2)
 നെയ്യഭിഷകം സ്വാമിക്ക്
 പാലഭിഷകം സ്വാമിക്ക്
 തിരുവാഭരണം സ്വാമിക്ക്
@@ -934,7 +960,8 @@
             },
             {
                 title: "Azhagaana Pazhani Malai",
-                lyrics: `അഴകന പഴനി മൈല ആണ്ടവ
+                lyrics: `~Pitch - G
+അഴകന പഴനി മൈല ആണ്ടവ
 ഉൈന്ന അനു ദിനവും പാട വേന്തൻ വേലവാ
 അഴകന പഴനി മൈല ആണ്ടവ
 ഉൈന്ന അനു ദിനവും പാട വേന്തൻ വേലവാ
@@ -1229,8 +1256,10 @@
             const list = document.getElementById('songList');
             list.innerHTML = bhajans.map((song, i) => {
                 const noLyrics = (song.lyrics === null || song.lyrics === '') ? '<span class="no-lyrics">⛔ No Lyrics</span>' : '';
+                const pitch = (song.lyrics || '').match(/~Pitch[^A-G#]*([A-G][#b]?)/i);
+                const pitchBadge = pitch ? `<span class="pitch-badge">${escapeHtml(pitch[1])}</span>` : '';
                 return `<a class="song-card" href="#${i}" onclick="showSong(${i});return false;">
-                    <span class="num">${i + 1}</span>${escapeHtml(song.title)}${noLyrics}
+                    <span class="num">${i + 1}</span><span class="song-title-text">${escapeHtml(song.title)}</span>${pitchBadge}${noLyrics}
                 </a>`;
             }).join('');
         }
