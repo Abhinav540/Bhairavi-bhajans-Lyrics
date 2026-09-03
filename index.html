@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhairavi Bhajans - Lyrics</title>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #1a1a1a;
+            --card-bg: #f7f7f7;
+            --card-hover: #ececec;
+            --border: #ddd;
+            --accent: #c0392b;
+            --accent-hover: #a93226;
+            --no-lyrics: #e74c3c;
+            --header-bg: #f0f0f0;
+            --marking: #555;
+        }
+
+        .dark {
+            --bg: #1a1a2e;
+            --text: #e0e0e0;
+            --card-bg: #1e2a45;
+            --card-hover: #243252;
+            --border: #333;
+            --accent: #e74c3c;
+            --accent-hover: #c0392b;
+            --no-lyrics: #ff6b6b;
+            --header-bg: #16213e;
+            --marking: #ffd166;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: background 0.3s, color 0.3s;
+            min-height: 100vh;
+        }
+
+        /* Top Header (fixed on all pages) */
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: var(--header-bg);
+            border-bottom: 1px solid var(--border);
+            padding: 6px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            transition: background 0.3s;
+        }
+
+        .topbar .brand {
+            font-size: 1.25em;
+            font-weight: 700;
+            color: var(--accent);
+            margin-right: auto;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .topbar button {
+            padding: 7px 14px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--card-bg);
+            color: var(--text);
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .topbar button:hover {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        .topbar button.active {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        .font-size-display {
+            padding: 5px 10px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--card-bg);
+            font-size: 0.85em;
+            min-width: 46px;
+            text-align: center;
+        }
+
+        /* Back to Home button */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            background: var(--accent);
+            color: #fff !important;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover {
+            background: var(--accent-hover);
+        }
+
+        /* HOME PAGE */
+        #pageHome {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px 16px 60px;
+        }
+
+        .home-title {
+            text-align: center;
+            font-size: 2em;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .home-subtitle {
+            text-align: center;
+            color: var(--text);
+            opacity: 0.7;
+            margin-bottom: 25px;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 500px;
+            display: block;
+            margin: 0 auto 25px;
+            padding: 12px 18px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            background: var(--card-bg);
+            color: var(--text);
+            font-size: 1em;
+            outline: none;
+            transition: border 0.3s;
+        }
+
+        .search-box:focus {
+            border-color: var(--accent);
+        }
+
+        .song-card {
+            display: block;
+            padding: 15px 18px;
+            margin-bottom: 8px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--text);
+            font-size: 1.1em;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .song-card:hover {
+            background: var(--card-hover);
+            border-color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        .song-card .num {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            line-height: 32px;
+            text-align: center;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.85em;
+            margin-right: 12px;
+        }
+
+        .song-card .no-lyrics {
+            color: var(--no-lyrics);
+            font-size: 0.8em;
+            font-weight: 700;
+            margin-left: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* LYRICS PAGE */
+        #pageLyrics {
+            display: none;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px 16px 60px;
+        }
+
+        .lyrics-header {
+            margin-bottom: 20px;
+        }
+
+        .lyrics-header .song-title {
+            font-size: 1.8em;
+            color: var(--accent);
+            margin: 15px 0 5px;
+        }
+
+        .lyrics-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            line-height: 1.9;
+        }
+
+        .lyrics-text {
+            font-size: 1.35em;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: inherit;
+        }
+
+        .lyrics-text .marking {
+            color: var(--marking);
+            font-weight: 700;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-style: italic;
+        }
+
+        .no-lyrics-box {
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 1.2em;
+            color: var(--no-lyrics);
+            font-weight: 700;
+        }
+
+        /* Scroll top */
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            font-size: 1.4em;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text);
+            opacity: 0.5;
+            font-size: 0.85em;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="topbar">
+        <a class="brand" href="#home" onclick="showHome(event)">🕉 Bhairavi Bhajans</a>
+        <button onclick="changeFontSize(-2)" title="Decrease Font">A-</button>
+        <span class="font-size-display" id="fontSizeDisplay">26px</span>
+        <button onclick="changeFontSize(2)" title="Increase Font">A+</button>
+        <button onclick="toggleDarkMode()" id="darkModeBtn" title="Toggle Dark Mode">🌙 Dark</button>
+    </div>
+
+    <!-- HOME PAGE -->
+    <div id="pageHome">
+        <div class="home-title">Bhairavi Bhajans</div>
+        <div class="home-subtitle">Tap a song to view its lyrics. Songs without lyrics are marked in red.</div>
+        <input type="text" class="search-box" id="searchBox" placeholder="Search bhajans..." oninput="filterSongs()">
+        <div id="songList"></div>
+        <footer>Bhairavi Bhajans © 2026</footer>
+    </div>
+
+    <!-- LYRICS PAGE -->
+    <div id="pageLyrics">
+        <div class="lyrics-header">
+            <a class="back-btn" href="#home" onclick="showHome(event)">← Back to Home</a>
+            <h2 class="song-title" id="songTitle"></h2>
+        </div>
+        <div class="lyrics-container" id="lyricsContainer"></div>
+    </div>
+
+    <button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
+
+    <script>
+        // ==============================================
+        // BHAJANS DATA
+        // ==============================================
+        // lyrics: null  => "No lyrics" shown in red
+        // lyrics: "..." => multi-line lyrics.
+        // Use "~TEXT" at start of a line to render it
+        //   as a musical marking (Pitch, section, etc.)
+        // ==============================================
+        const bhajans = [
+            {
+                title: "Prabho Ganapathe",
+                lyrics: `ഗജാനനം ഭൂത ഗണാദി സേവിതം
+കപിത്ഥ ജമ്പൂ ഫല സാര ഭക്ഷിതം
+ഉമാ സുതം ശോക വിനാശ കാരണം
+നമാമി വിഘ്നേശ്വര പാദ പങ്കജം
+
+~പ്രഭോ ഗണപതേ പരി പൂരണ വാഴ് വരുൾവായേ...
+പ്രഭോ ഗണപതേ പരി പൂരണ വാഴ് വരുൾവായേ...
+ഗണപതേ... ഗണപതേ....
+
+~BGM - harmonium
+~Pitch - A
+~Starting singers
+സാന്തു വണങ്ങി തുതി പാടി ആടി ഉന്തൻ
+സന്നിധി സരൺ അടയ്േന്താമോ... (2)
+സാന്ത സിദ്ധ സൗഭാഗ്യം യാവയും തന്തരുൾ സദ്ഗുരു നീയേ (2)
+(പ്രഭോ)
+
+~BGM - flute
+ആദി മൂല ഗണനാഥ ഗജാനന അർപ്പിത ധവള സ്വരൂപാ (2)
+ദേവ ദേവ ജയ വിജയ വിനായക ചിന്മയ പര ശിവ ദീപ (2)
+(പ്രഭോ)
+
+~BGM - violin
+തേടി തേടി എങ്കോ ഓടുഗി്രണ്ടാർ
+ഉൈന്ന തേടി കണ്ടു കൊള്ളലാമോ....(2)
+കോടി കോടി മദയാനകൾ പണി സെയ്യ
+കുരുടെന വിളങ്കും പെമ്മാനെ... (2)
+(പ്രഭോ)
+
+~BGM - harmonium
+ജ്ഞാന വൈരാഗ്യ വിസാര സാര സ്വര രാഗലയ നടന പാദ (2)
+നാമ ഭജന ഗുണ കീർത്തന നവവിധ നായക ജയ ജഗനാഥ (2)
+(പ്രഭോ)
+
+~BGM - flute
+പാർവതി ബാല അപാര വാര വര പരമ ഭഗവ ഭവ --തരണ (2)
+ഭക്ത ജന സുമുഖ പ്രണവ വിനായക പാവന പരിമള --ചരണ (2)
+(പ്രഭോ)`
+            },
+            {
+                title: "Sthambham Pilarkkunna",
+                lyrics: `~സ്തംഭം പിളർക്കുന്ന ഹുങ്കാര ശബ്ദം
+ദിഗന്തം നടുങ്ങുന്ന ദുന്തുഭി നാദം
+ശതേകാടി സൂര്യന്മാർ എരിയും പ്രതിനേരം
+ചുടുനിണം തേടുന്ന ചുരികേപാൽ നാവ് (2)
+മരണം വിളങ്ങുന്ന പ്രതിരൂര ദൃംഷ്ടം
+പ്രളയാഗ്നി ചുഴിതീർത്തജട സടാ കേസരം
+പ്രഹരണം പേഴുന്നാരഷ്ട ഭുജങ്ങൾ
+ആകാശസീമയ്ക്കനന്തമാം ദേഹം
+ത്രിലോകം നടുങ്ങുന്ന നരസിംഹ രൂപം
+ത്രിലോകം നടുങ്ങുന്ന നരസിംഹ രൂപം
+
+~Pitch - G
+~Starting singers
+ഓം നരസിംഹ രൂപായ (4)
+നരനലല് മൃഗമലല് നരസിംഹ രൂപം
+രാവലല് പകലലല് നിരസന്ധ്യേനരം
+അകമലല് പുറമലല് ഉമ്മറപടിയിൽ
+വിണ്ണലല് മണ്ണലല് തിരുമടിത്തട്ടിൽ
+സ്തംഭം പിളർക്കുന്ന ഹുങ്കാര ശബ്ദം
+ദിഗന്തം നടുങ്ങുന്ന ദുന്തുഭി നാദം
+ശതേകാടി സൂര്യന്മാർ എരിയും പ്രതിനേരം
+ചുടുനിണം തേടുന്ന ചുരികേപാൽ നാവ്
+ഓം നരസിംഹ രൂപായ (4)`
+            },
+            {
+                title: "Achutham Keshavam",
+                lyrics: null
+            },
+            {
+                title: "Nandanandana Govinda",
+                lyrics: null
+            },
+            {
+                title: "Dharikantte",
+                lyrics: `~വടക്കുംനാഥാ സർവ്വം നടത്തുംനാഥാ......
+വടക്കുംനാഥാ സർവ്വം നടത്തുംനാഥാ......
+നിൻ്റ നടക്കൽ ഞാൻ സാഷ്ടാംഗം നമിക്കുന്നീതാ
+സമാധികൊള്ളും സച്ചിന്മയ സംഹാരാധിപാ
+സമസ്താപരാധവും ക്ഷമിക്ക ദേവാ
+വടക്കുംനാഥാ സർവ്വം നടത്തുംനാഥാ..
+
+~BGM - Flute Harmonium
+~Pitch - A
+~Starting singers
+പരശുരാമേനോടൊത്ത് രജതാരദിവിട്ടങ്ങ്
+പരിവാരങ്ങളോടിങ്ങു പരിലസിപ്പും
+പരശുരാമേനോടൊത്ത് രജതാരദിവിട്ടങ്ങ്
+പരിവാരങ്ങളോടിങ്ങു പരിലസിപ്പും
+അഭംഗുരം പൊഴിയുംനിൻ പ്രഭയാൽതൃശ്ശിവപുരീ
+അഭമമാകും തെക്കൻ കൈലമായി
+എന്നും ശുഭമെങ്ങും വിളങ്ങീടും കൈശലമായീ
+വടക്കുംനാഥാ സർവ്വം നടത്തുംനാഥാ......
+നിൻ്റ നടക്കൽ ഞാൻ സാഷ്ടാംഗം നമിക്കുന്നീതാ
+സമാധികൊള്ളും സച്ചിന്മയ സംഹാരാധിപാ
+
+സമസ്താപരാധവും ക്ഷമിക്ക ദേവാ
+വടക്കുംനാഥാ സർവ്വം നടത്തുംനാഥാ.. (3)
+സർവ്വം നടത്തുംനാഥാ.. (2)
+
+~Pitch - A
+~Starting singers
+ദാരികൻ്റ ശിരസ് കൊയ്െതാരു
+ഘോരരൂപിണി അംബികേ
+ദാരികൻ്റ ശിരസ് കൊയ്െതാരു
+ഘോരരൂപിണി അംബികേ
+കാരിരുള് സമമായ നിൻ
+തിരുവാർമുടി ചുരുള് കൈകെതാഴാം
+
+തീക്കനൽ ജ്വലിച്ചും തള്ളിയ
+തീക്ഷ്ണമാം നയനങ്ങളും
+തീക്കനല് ജ്വലിച്ചും തള്ളിയ
+തീക്ഷ്ണമാം നയനങ്ങളും
+കൈകെതാഴാം ഭയങ്കരി
+തവ മൂർച്ഛേയറിയ ദംഷ്്രടവും
+ദാരികൻ്റ ശിരസ് കൊയ്െതാരു
+ഘോരരൂപിണി അംബികേ
+
+ദാരികൻ്റ ശിരസ് കൊയ്െതാരു
+ഘോരരൂപിണി അംബികേ
+കാരിരുൾ സമമായ നിൻ തിരുവാർമുടി ചുരുള് കൈകെതാഴാം
+ഹരനുടെ കരമതിൽ ഒരു പിടി ജടയതു
+പാരിലടിെച്ചാരു നേരത്തായ് (2)
+ഹരനുടെ കരമതിൽ ഒരു പിടി ജടയതു
+പാരിലടിെച്ചാരു നേരത്തായ്
+മദഗജമലറിയടുക്കും പോലെ
+മദഗജമലറിയടുക്കും പോലെ
+മദിച്ചും കൊടിച്ചും വരും കാളി
+
+കരതലമമരും ഖഡ്ഗം ശൂലം
+ദാരികനുടെ തലവട്ടകയും (2)
+കരതല മമരും ഖഡ്ഗം ശൂലം
+ദാരികനുടെ തലവട്ടകയും
+വേദാളത്തിൻ ഘടതലേമറി
+വേദാളത്തിൻ ഘടതലേമറി
+വിളങ്ങി വിലസിവരും കാളി
+ശംഖുകടഞ്ഞ കണങ്കാൽ മേലെ
+കാഞ്ചന മണിയാല് നൂപുരവും (2)
+ശംഖുകടഞ്ഞ കണങ്കാൽ മേലെ
+കാഞ്ചന മണിയാല് നൂപുരവും
+
+കടുംതുടിരവേമാടിഇടെഞ്ഞാരു
+നടനം നടനം നടനം
+കടുംതുടിരവേമാടിഇടെഞ്ഞാരു
+നടനം നാദി നടുക്കി വരും കാളി
+
+~flute BGM - kannadi puzhayude theerathu
+രക്തവസ്്രതധാരിണി മഹാട്ടഹാസ രൂപിണി
+ശ്മശാനനൃത്ത ലാലേസ കപാലമാല ധാരിണി (2)
+
+കൃഷ്ണഖഡ്ഗ ശോഭിതേ ത്രിശൂലിനി കപാലികേ
+പ്രപഞ്ചകാരിണി ശിവേ രാജരാജപൂജിതേ (2)
+ചിദഗ്നികുണ്ഡ നർത്തകി ചിദംബര പ്രവേശിനി
+ചിദഗ്നി ഭസ്മധാരിണി ചിദംബേരശ്വരി ശിവേ (2)
+അനേകശസ്്രത ധാരിണി ദിഗംബേര ഭയങ്കരി
+മഹാകൃപാ പ്രദായിനി കാളികേ നമോസ്തുതേ (2)
+കാളികേ നമോസ്തുതേ കാളികേ നമോസ്തുതേ
+
+ഭ്രദകാളികേ നമോസ്തുതേ ഭ്രദകാളികേ നമോസ്തുതേ
+കാളികേ നമോസ്തുതേ കാളികേ നമോസ്തുതേ
+ഭ്രദകാളികേ നമോസ്തുതേ ഭ്രദകാളികേ നമോസ്തുതേ
+കാളികേ നമോസ്തുതേ കാളികേ നമോസ്തുതേ
+ഭ്രദകാളികേ നമോസ്തുതേ ഭ്രദകാളികേ നമോസ്തുതേ
+ഭ്രദകാളികേ നമോസ്തുതേ ഭ്രദകാളികേ നമോസ്തുതേ`
+            },
+            {
+                title: "Pambhaganapathi",
+                lyrics: `~BGM - harmonium and violin
+പമ്പാഗണപതി പാരിൻ്റയധിപതി
+കൊമ്പാർന്നുണരണമൻപിൽ
+തെൻ്റ തുമ്പിൈക്ക ചേർക്കേണം നെഞ്ചിൽ
+വിഘ്നങ്ങൾ വിധി പോലെ തീർക്കേണം മുൻപിൽ (2)
+വേദാന്തെപ്പാരുളിൽ ആധാരശിലയേ
+കാരുണ്യക്കടൽ കണ്ട കലികാല പ്രഭുവേ
+കണികാണാൻ മുന്നിൽ ചെലല്ലുമ്പോൾ
+ദുഃഖങ്ങൾ കർപ്പൂരത്തിരിയായ് കത്തുമ്പോൾ
+അയ്യപ്പൻ കളഭച്ചാർത്തണിയാൻ നിൽക്കുമ്പോൾ
+
+~Pitch - A
+~Starting - rhythm pad
+നെയ്യഭിഷകം സ്വാമിക്ക്
+പാലഭിഷകം സ്വാമിക്ക്
+തിരുവാഭരണം സ്വാമിക്ക്
+തിരുവമൃതേത്തും സ്വാമിക്ക് (2)
+പമ്പാഗണപതി പാരിൻ്റയധിപതി
+കൊമ്പാർന്നുണരണമൻപിൽ
+തെൻ്റ തുമ്പിൈക്ക ചേർക്കേണം നെഞ്ചിൽ
+വിഘ്നങ്ങൾ വിധി പോലെ തീർക്കേണം മുൻപിൽ
+
+~BGM - harmonium , flute & violin
+പന്തളനാഥൻ വൻ പുലി മേലെ വെന്നഴുന്നള്ളും മാമലയിൽ
+മകരവിളക്കിൻ മഞ്ജുളനാളം മിഴി തെളിയാനായ് കാണും ഞാൻ (2)
+ഓ... ദയാമയാ പരാല്പരാ
+ശരണജപങ്ങളോടെ നിൽക്കേവ (2)
+ഒരു നെയ്ത്തിരിക്കു പകരം എരിഞ്ഞു നരജന്മെമന്നുമുരുകും
+പമ്പാഗണപതി പാരിൻ്റയധിപതി
+കൊമ്പാർന്നുണരണമൻപിൽ
+തെൻ്റ തുമ്പിൈക്ക ചേർക്കേണം നെഞ്ചിൽ
+വിഘ്നങ്ങൾ വിധി പോലെ തീർക്കേണം മുൻപിൽ
+
+~BGM - harmonium , flute & violin
+സങ്കടമെലല്ലാമിരുമുടിയാക്കി സന്നിധി തേടും പാപികളെ
+സം്രകമസന്ധ്യ നിന്നുടെ ചിമിഴിൽ കുങ്കുമമുഴിയും അയ്യപ്പൻ
+ഓ... നിരാമയാ നിരന്തരാ
+പ്രണവജപങ്ങളോടെ നിൽക്കേവ
+ഒരു നാളികേരമുടയുന്നേപോലെ ഉടയുന്നെതെൻ്റ ഹൃദയം
+പമ്പാഗണപതി പാരിൻ്റയധിപതി
+കൊമ്പാർന്നുണരണമൻപിൽ
+തെൻ്റ തുമ്പിൈക്ക ചേർക്കേണം നെഞ്ചിൽ
+വിഘ്നങ്ങൾ വിധി പോലെ തീർക്കേണം മുൻപിൽ
+
+വേദാന്തെപ്പാരുളിൽ ആധാരശിലയേ
+കാരുണ്യക്കടൽ കണ്ട കലികാല പ്രഭുവേ
+കണികാണാൻ മുന്നിൽ ചെലല്ലുമ്പോൾ
+ദുഃഖങ്ങൾ കർപ്പൂരത്തിരിയായ് കത്തുമ്പോൾ
+അയ്യപ്പൻ കളഭച്ചാർത്തണിയാൻ നിൽക്കുമ്പോൾ
+നെയ്യഭിഷകം സ്വാമിക്ക് പാലഭിഷകം സ്വാമിക്ക്
+തിരുവാഭരണം സ്വാമിക്ക് തിരുവമൃതേത്തും സ്വാമിക്ക് (2)`
+            },
+            {
+                title: "Harimana",
+                lyrics: `നാഗഭൂഷിത പദങ്ങളും ചടുലതാളമോടു തിരുനടനവും
+ഭസ്മഭൂഷിതമുരസ്ഥലം ഹരിണ ചർമ്മവും ഫണിഗണങ്ങളും..
+വാസുകീ പരിവിശോഭിതം വിമല വക്ഷസ്സും ഭവഭയാപഹം...
+ച്രന്ദശേഖര തെളിഞ്ഞു കാണണം അന്തികേ മമ സദാശിവാ..
+നീലകണ്ഠ തവ നീലകണ്ഠവും
+അതിൽ പുളെഞ്ഞാര ഹിമാലയും
+ഭൂതിശോഭ വഴിയും കരങ്ങളിൽ ഢമ ഢമാരവ കടും തുടി..
+
+~Pitch - A
+~Starting singers
+ശൂലപാണേ....
+ശൂലപാണേ മഹാത്രിശൂലമതും മൃഗവുേമന്തി ഗതികൊയുവാൻ
+ച്രന്ദശേഖര തെളിഞ്ഞു കാണണം അന്തികേ മമ സദാശിവാ...
+സ്കന്ദമാർന്നു മിടതൂർന്നു മു്രഗവിഷ സർപ്പമറി ഇഴയുന്നാരാ
+ജടയുമുള്ളിൽ വിലസുന്ന ഗംഗയും അടിയെനന്നുമഴൽ പോക്കണം
+യോഗനാസികയുമാർത്തെര കരുതി ആർ്രദമായൊരിരു മിഴികളും
+ച്രന്ദശേഖര തെളിഞ്ഞു കാണണം അന്തികേ മമ സദാശിവാ... (2)
+ശിവായ പരമേശ്വരായ ച്രന്ദശേഖരായ നമോഹാ
+ശിവ ശിവ ശിവ ശിവ ശിവായ നമോഹാ`
+            },
+            {
+                title: "Nagabhooshitha",
+                lyrics: null
+            },
+            {
+                title: "Nrithamaadoo Krishna",
+                lyrics: `~സംഗീതമേ - Intro
+നൃത്തമാടൂ കൃഷ് ണാ നടനമാടൂ കണ്ണാ വെണ്ണ തരാം ഗോപാലാ
+മുകുന്ദാ വെണ്ണ തരാം ഗോപാലാ.... (2)
+ആദിമൈചതന്യ നാഭിയിൽ വിരിയും
+ആയിരമിതളുള്ള താമരയിൽ (2)
+രചനാ ചതുരൻ ചതുർമുഖനുണർന്നു
+രചനാ ചതുരൻ ചതുർമുഖനുണർന്നു
+സർഗ്ഗം തുടർന്നു കലയിെലാരു സ്വർഗ്ഗം വിടർന്നു മധുരമധു
+രുചിരസുമ നളിനദള കദനഹര മൃദുലതര
+ഹൃദയസദന ലതികയണിഞ്ഞു
+
+~Pitch - A
+നൃത്തമാടൂ കൃഷ് ണാ നടനമാടൂ കണ്ണാ വെണ്ണ തരാം ഗോപാലാ
+മുകുന്ദാ വെണ്ണ തരാം ഗോപാലാ....
+
+~Violin : ഗോവർദ്ധനഗിരി (2) times
+സഫലമീ ജീവിതം പ്രേമപൂർണ്ണം
+പാർവ്വതീലോല നിൻ കരുണയാലോ
+തിരുജടയ്ക്കുള്ളിലിളകിയുണരുന്നു
+ലോകധാത്രിയാം ശിവഗംഗ
+ലയമുണർത്തുന്നു സ്വരമുയർത്തുന്നു
+
+തുടിയ്ക്കുമുഷസ്സിൽ നഭസ്സിലുയർന്നു
+മൃഗമദതിലകിത സുരജനമഖിലം
+ശിവദമമൃത നടന ധിരന തിലല്ാനാ ആ ആ ....
+തന താനം ത താനം ത താനം......... (4)
+നിനി-സസസാ -നിസ-രി ഗ രി-സ സ
+സ-സാ നി-സ-ധ-നി-പാ മ- പാ ഗ- മ രി സ
+രി-രി-ഗ-രി-സ, മ മ പ ധ ധ നി സ രി രി
+ഗഗ-സ-രി-ഗഗ-നി-സ ധധ - മ പ ധ ധ
+
+നി-സ-രിരിരി സ ധ നി പമപഗമ രി സ
+നിനി സസാ, രിരി ഗഗ രിരി സാധ നി സാ
+രിരി ഗരിസാ മമ പധധ നി സ രിരീ ഗരീസാ
+സസ-രിഗസ-ധധനി പ മ പഗ-മരിസ-രിസ
+സ സ സ സ രിരിരി രിഗ ഗ ഗ രി സ
+മ മ മ മ മ പ പ പ പ പ ധ ധ ധ ധ ധ നി പാ
+ധ ധ ധ ധ ധ, നി നി നി നി നി, സ സ സ സ സ രി - ഗ
+
+ഗരിസ ധ നി സ സ
+ഗരിസ ധ നി പ മ പ ധ നി സ സ സാ -രി രി രി
+ഗരിസ ധ നി പമപധ നി സരിഗ രി സ
+സത്യവും അമരവും ഏകേമ
+പൂർണവും ശൂന്യനും ഏകേമ
+കൃഷ്ണനും രുദ്രനും ഏകേമ`
+            },
+            {
+                title: "Unnikanna Vaayo",
+                lyrics: `ഉണ്ണി കണ്ണാ വായോ ഊഞ്ഞാലാടാൻ വായോ
+അമ്മേക്കാരുമ്മ നീ കൊണ്ടു വായോ (2)
+പീലി തിരുമുടി മാടിത്തരാം ഉണ്ണി ഓടക്കുഴലൂതി പാടിത്തായോ
+ആലോലം താലോലം താരാട്ടം ഞാൻ നിെന്ന
+ആനന്ദ പ്രശീകൃഷ്ണ ഓടിവായോ...
+
+~BGM - flute - entharo mahanu
+~Flute - അമ്പലപ്പുഴ - 3 finger C
+~Pitch - C
+പീലി ചൂടിയോ വനമാല ചാർത്തിയോ
+ഗോപനന്ദനൻ മായ കാട്ടി നിന്നുവോ
+കൃഷ്ണഗാഥയായ് ഇെന്നൻ്റ മാനസം
+നിൻ്റ പാദേരണു ചൂടി ധന്യയായ് ഞാൻ
+യമുനാതടത്തിലും വൃന്ദാവനത്തിലും
+രസ രാസലാസ്യമാടി വന്ന രാധയേലല് ഞാൻ
+പ്രിയ രാധയേലല് ഞാൻ
+
+~Flute - പ്രിയനോരാൾ - 2 finger C
+കണ്ടു ഞാൻ കണ്ണനെ കായാമ്പൂ വർണ്ണനെ
+ഗുരുവായൂരമ്പലനടയിൽ (2)
+
+രാ ജീവലോചനൻ എൻ്റ കണ്ണൻ
+അമ്പാടിപ്പുനിലാവെൻ്റ കണ്ണൻ
+മണിമുരളികയൂതി എൻ്റ മുന്നിൽ വന്നു നീ
+പുൽകി നിന്നു നീ (കണ്ടു ഞാൻ..)
+മനോഹരീ രാധേ രാധേ മുരാരിയിെന്നവിടെ പെണ്ണേ
+ഇണങ്ങിയോ കണ്ണൻ തെൻ്റ ഇണങ്ങുവാൻ ചെലല്ല് ചെലല്ല്
+മുകുന്ദൻ്റ ഓമൽ ചുണ്ടിൽ മുളം തണ്ടു മൂളി പൊന്നേ
+മനസ്സിൻ്റ ഉറികളിലൂറിയ സുഖനവനീതം പകരാൻ നിലല്ല്
+മനോഹരീ രാധേ രാധേ മുരാരിയിെന്നവിടെ പെണ്ണേ
+ഇണങ്ങിയോ കണ്ണൻ തെൻ്റ ഇണങ്ങുവാൻ ചെലല്ല് ചെലല്ല്
+
+കണ്ണാ നീ ആടിയ ലീലകൾ....
+കണ്ണാ നീ ആടിയ ലീലകൾ ഒന്നൂടെ ആടൂലേ...
+കണ്ണാ നീ ആടിയ ലീലകൾ ഒന്നൂടെ ആടൂലേ
+ഒന്നൂടെ ആടൂലേ...കണ്ണാ..കണ്ണാ...കണ്ണാ..
+കണ്ണാ...കണ്ണാ....കണ്ണാ...കണ്ണാ..കണ്ണാ....
+ജയ് ജയ് റാം ജയ് ജയ് റാം
+ജയ് ജയ് റാം ജയ് ജയ് റാം
+സീത റാം ജയ് ജയ് റാം ജയ് ജയ് റാം ജയ് ജയ് റാം. (2)
+
+~Flute - രാവണൻ തൻ തലയെ കൊയ്യ 2 finger C
+രാവണൻ തൻ തലയെ കൊയ്യ രാമൻ ആക വന്തായ്
+കണ്ണനാകാ നീയേ വന്ത് കാഥലും തന്തായ്
+ഇങ്ക് ഉന്നവതാരം ഓെവ്വാൻ്രടിലും താൻ ഉൻ താരം നാനെ
+ഉൻ തിരുവടി പട്ടാൽ തിരുമണം ആകും ഏൻ്രടിലെ എങ്കുകിേരെന..
+മയിൽ പീലി സൂടി നിൽക്കും മന്നവനെ
+മങ്കയ്ക്ക് എങ്കും നീയേ മണവാളേന...
+
+മുകുന്ദ മുകുന്ദ കൃഷ്ണ മുകുന്ദ മുകുന്ദ...
+വരം താ വരം താ വൃന്ദാ വനം താ വനം താ... (2)`
+            },
+            {
+                title: "Pranadhosmi",
+                lyrics: null
+            },
+            {
+                title: "Azhakudeivamaga Vandhu",
+                lyrics: null
+            },
+            {
+                title: "Swamiponnayyappa",
+                lyrics: null
+            },
+            {
+                title: "Neela Neela",
+                lyrics: `നീല നീല നീല മലയിൽ
+മഞ്ഞണിഞ്ഞരാമലയിൽ
+പൊന്നണിഞ്ഞ കോവിലിനുള്ളിൽ
+നെയ്യണിഞ്ഞു നിൻ രൂപം
+നീല നീല നീല മലയിൽ ( സ്വാമിയേ )
+മഞ്ഞണിഞ്ഞരാമലയിൽ ( അയ്യപ്പാ )
+പൊന്നണിഞ്ഞ കോവിലിനുള്ളിൽ
+നെയ്യണിഞ്ഞു നിൻ രൂപം
+
+~Pitch - A
+~Starting - vocal
+സ്വാമി സ്വാമി സ്വാമി ശരണം അയ്യപ്പ....
+ഹരിഹരസുധൻ അഖില വരദൻ അയ്യപ്പ..... (2)
+മഞ്ഞണി മാമലേമേല കർപ്പൂരക്കടല്..
+കരയിൽ സ്വാമിതൻ പൊന്നണിേമട് (2)
+മാലുകൾ നീക്കിടുവാൻ അയ്യപ്പാ നീ..
+മഹിഷീ മാരകൻ ആയിട്.. (2)
+കലികാലം കൺപാർക്കും പരമാർത്ഥ പുണ്യേമ
+നീ തന്നതേലല്ാ എൻ ജീവിതം
+പഞ്ചാരദിനാഥൻ ഈ സന്നിധാനത്തിലെ സന്യാസി തികവ്
+
+പഞ്ചഭൂതങ്ങളും പാടി നമിക്കുന്ന സം്രകാന്തി കനിവ്
+ചന്ദന പൂനിലാ പട്ട് പുതക്കുന്ന വേദാന്ത തിടമ്പ്
+നൊന്ത് വിളിക്കുമ്പോൾ അന്തികെത്തത്തുന്ന കല്പാന്തകുളിര്
+ഹരിഹരസുധൻ അടിയെന ഇനി സാന്ത്വന തേനൂട്ട്
+ഹാലാസ്യനാഥൻ്റ പൊന്നുണ്ണി ആയൻ്റെ സംഗീത പൊരുള്
+അയ്യപ്പൻ സായൂജ്യപ്പടവ് ..
+സാമേവദം നാവിലുണർത്തിയ സ്വാമിയേ
+എന്നെ സ്വരപൂജ മലരാക്കിത്തീർക്കേണ
+തത്വമസി പൊരുളേ നിത്യസത്യദയാനിധിയേ
+ഇനി കല്പാന്ത മിഴിയിതൾ തുറന്നീടേണ
+
+ഇരുമുടി നിറയുമീ ദുരിതം ഒഴിയേണ
+ഇഹപര ശാന്തിതൻ അമൃതം അരുളേണ
+മനസ്സാകും പുലിമേലെ വാഴേണ
+ജന്മശനി നീക്കി ശരികിടണമേ
+സന്യാസി രൂപനെ സംഗീത പ്രിയനെ
+സിന്ദൂരവർണ്ണനെ സ്വാമിയേ. (2)`
+            },
+            {
+                title: "Moonnaam Thrikkannil",
+                lyrics: null
+            },
+            {
+                title: "Ambhaparameshwari",
+                lyrics: null
+            },
+            {
+                title: "Shanmukha Sodari",
+                lyrics: `ഷണ്മുഖസോദരിയായ് മരുവുെന്നൻ ആറ്റുകാലിലെ അമ്മ
+ആമയം ഒെക്ക അകറ്റിടും എന്നും കണ്ണകിയാം എൻ അമ്മ
+ഉലകിൻ ഉടയവൾ അമ്മ ഇടെനഞ്ചു വാഴുന്നാരമ്മ
+ഇഹപര ദുരിതമകറ്റുകയാണെൻ പനിമതി മുഖിയാം അമ്മ
+ഷണ്മുഖസോദരിയായ് മരുവുെന്നൻ
+ആറ്റുകാലിലെ അമ്മ
+ആമയം ഒെക്ക അകറ്റിടും എന്നും കണ്ണകിയാം എൻ അമ്മ
+
+~Pitch - A
+~Intro - Violin
+അഗതികൾക്കാശ്രയം അമ്മ കരുണാ സാഗരം അമ്മ
+ഒന്നു വിളിക്കുകിൽ ഉടെന മനസ്സിനു സ്വാന്തനം ഏകിടും അമ്മ
+വേനൽ മഴയാണമ്മ പൊങ്കാല ചോറുണ്ണും അമ്മ
+വേദന തീർത്തു തലോടുകയാണീ വരദായിനിയാം അമ്മ
+ഷണ്മുഖസോദരിയായ് മരുവുെന്നൻ
+ആറ്റുകാലിലെ അമ്മ
+ആമയം ഒെക്ക അകറ്റിടും എന്നും കണ്ണകിയാം എൻ അമ്മ
+വാത്സല്യദായനി അമ്മ അശ്രു തുടച്ചീടും അമ്മ
+ദിക്കറിയാതെ അലഞ്ഞിടുവോർക്ക് ഒരു വീഥിക ആയിടും അമ്മ
+
+തീരാ സ്നേഹം അമ്മ തോരാത്ത പുണ്യമാണമ്മ
+കിള്ളിയാറിൻ കരയിൽ പൂത്താരു കനിവിൻ മലരാണമ്മ
+ഷണ്മുഖസോദരിയായ് മരുവുെന്നൻ ആറ്റുകാലിലെ അമ്മ
+ആമയം ഒെക്ക അകറ്റിടും എന്നും കണ്ണകിയാം എൻ അമ്മ
+ഉലകിൻ ഉടയവൾ അമ്മ ഇടെനഞ്ചു വാഴുന്നാരമ്മ
+ഇഹപര ദുരിതമകറ്റുകയാണെൻ പനിമതി മുഖിയാം അമ്മ`
+            },
+            {
+                title: "Irumudikettu",
+                lyrics: null
+            },
+            {
+                title: "Anjaneya Veera",
+                lyrics: `~Pitch - A
+~Starting singers
+ആഞ്ജേനയ വീര ഹനുമന്ത ശൂര
+വായു കുമാര വാനര വീര
+വായു കുമാര വാനര വീര
+ശീറാം ജയറാം ജയ് ജയ് റാം സീതാ റാം ജയ് രാധേ ശ്യാം (4)`
+            },
+            {
+                title: "Azhagaana Pazhani Malai",
+                lyrics: `അഴകന പഴനി മൈല ആണ്ടവ
+ഉൈന്ന അനു ദിനവും പാട വേന്തൻ വേലവാ
+അഴകന പഴനി മൈല ആണ്ടവ
+ഉൈന്ന അനു ദിനവും പാട വേന്തൻ വേലവാ
+വള്ളി മയിൽ നാദേന വാ വാടി വേലേന
+വള്ളി മയിൽ നാദേന വാ വാടി വേലേന
+വരേവണ്ടും മയിൽ മീത് മുരുഗയ്യേന
+മുരുക മുരുക മുരുക...മുരുക...
+മുരുക മുരുക മുരുക...മുരുക...
+
+അഴകന പഴനി മൈല ആണ്ടവ
+ഉൈന്ന അനു ദിനവും പാട വേന്തൻ വേലവാ..
+
+~BGM - harmonium
+വെള്ളി തിരുനീരും വെ്രടി വടിവേലും ഉള്ളതിൽ തൊണ്ടുമേ..
+വെള്ളി മയിേലരി വേലൻ വരും വെര നെഞ്ചം കാണുമേ
+വെള്ളി തിരുനീരും വെ്രടി വടിവേലും ഉള്ളതിൽ തൊണ്ടുമേ..
+വെള്ളി മയിേലരി വേലൻ വരും വെര നെഞ്ചം കാണുമേ
+എൈന ആളും ആണ്ടവനേ എഴിൽ വേലവാ
+എൈന ആളും ആണ്ടവനേ എഴിൽ വേലവാ
+ഏഴിനെയും ഉൈനപാട അരുൾവായ് അയ്യാ
+ഏഴിനെയും ഉൈനപാട അരുൾവായ് അയ്യാ
+മുരുക മുരുക മുരുക...മുരുക...
+മുരുക മുരുക മുരുക...മുരുക...
+അഴകന പഴനി മൈല ആണ്ടവ
+ഉൈന്ന അനു ദിനവും പാട വേന്തൻ വേലവാ
+
+വള്ളി മയിൽ നാദേന വാ വാടി വേലേന
+വള്ളി മയിൽ നാദേന വാ വാടി വേലേന
+വരേവണ്ടും മയിൽ മീത് മുരുഗയ്യേന
+മുരുക മുരുക മുരുക...മുരുക...
+മുരുക മുരുക മുരുക...മുരുക...
+പാലും തേൻ അഭിഷകവും (4)
+ഭക്തർകളിൽ കാവടിയും(4)
+പാർപ്പവങ്കൾ ഉള്ളെമലല്ലാം (4)
+പരംഗിരി ദേവൻ ആകി (4)
+
+ചിന്ന ചിന്ന മുരുകാ മുരുകാ ശിങ്കാര മുരുകാ...(4)
+(ചിന്ന ചിന്ന ചിന്ന ചിന്ന) (4)
+ചിന്ന ചിന്ന മുരുകാ മുരുകാ
+ശിങ്കാര മുരുകാ...(4)
+ചെന്തൂർ കടൽ കരയിൽ (4)
+ഭക്തർകെള കാത്തിടുവേ (4)
+പാർപ്പവങ്കൾ മനംമഗീഴ(4)
+സൂര്യനെ സംഹാരം സെയിതായ് (4)
+ചിന്ന ചിന്ന മുരുകാ മുരുകാ
+ശിങ്കാര മുരുകാ...(4)
+(ചിന്ന ചിന്ന ചിന്ന ചിന്ന) (4)
+ചിന്ന ചിന്ന മുരുകാ മുരുകാ
+ശിങ്കാര മുരുകാ...(4)
+വേൽ വേൽ മുരുകാ......`
+            },
+            {
+                title: "Vel Vel Vel Murugha",
+                lyrics: null
+            },
+            {
+                title: "Namadeva Keerthana",
+                lyrics: `~BGM - harmonium and violin
+പമ്പാഗണപതി പാരിൻ്റയധിപതി
+കൊമ്പാർന്നുണരണമൻപിൽ
+തെൻ്റ തുമ്പിൈക്ക ചേർക്കേണം നെഞ്ചിൽ
+വിഘ്നങ്ങൾ വിധി പോലെ തീർക്കേണം മുൻപിൽ (2)
+വേദാന്തെപ്പാരുളിൽ ആധാരശിലയേ
+കാരുണ്യക്കടൽ കണ്ട കലികാല പ്രഭുവേ
+കണികാണാൻ മുന്നിൽ ചെലല്ലുമ്പോൾ
+ദുഃഖങ്ങൾ കർപ്പൂരത്തിരിയായ് കത്തുമ്പോൾ
+അയ്യപ്പൻ കളഭച്ചാർത്തണിയാൻ നിൽക്കുമ്പോൾ
+
+~Pitch - A
+~Starting - rhythm pad
+നെയ്യഭിഷകം സ്വാമിക്ക്
+പാലഭിഷകം സ്വാമിക്ക്
+തിരുവാഭരണം സ്വാമിക്ക്
+തിരുവമൃതേത്തും സ്വാമിക്ക് (2)
+പമ്പാഗണപതി പാരിൻ്റയധിപതി
+കൊമ്പാർന്നുണരണമൻപിൽ
+തെൻ്റ തുമ്പിൈക്ക ചേർക്കേണം നെഞ്ചിൽ
+വിഘ്നങ്ങൾ വിധി പോലെ തീർക്കേണം മുൻപിൽ
+
+~BGM - harmonium , flute & violin
+പന്തളനാഥൻ വൻ പുലി മേലെ വെന്നഴുന്നള്ളും മാമലയിൽ
+മകരവിളക്കിൻ മഞ്ജുളനാളം മിഴി തെളിയാനായ് കാണും ഞാൻ (2)
+ഓ... ദയാമയാ പരാല്പരാ
+ശരണജപങ്ങളോടെ നിൽക്കേവ (2)
+ഒരു നെയ്ത്തിരിക്കു പകരം എരിഞ്ഞു നരജന്മെമന്നുമുരുകും
+പമ്പാഗണപതി പാരിൻ്റയധിപതി
+കൊമ്പാർന്നുണരണമൻപിൽ
+തെൻ്റ തുമ്പിൈക്ക ചേർക്കേണം നെഞ്ചിൽ
+വിഘ്നങ്ങൾ വിധി പോലെ തീർക്കേണം മുൻപിൽ
+
+~BGM - harmonium , flute & violin
+സങ്കടമെലല്ലാമിരുമുടിയാക്കി സന്നിധി തേടും പാപികളെ
+സം്രകമസന്ധ്യ നിന്നുടെ ചിമിഴിൽ കുങ്കുമമുഴിയും അയ്യപ്പൻ
+ഓ... നിരാമയാ നിരന്തരാ
+പ്രണവജപങ്ങളോടെ നിൽക്കേവ
+ഒരു നാളികേരമുടയുന്നേപോലെ ഉടയുന്നെതെൻ്റ ഹൃദയം
+പമ്പാഗണപതി പാരിൻ്റയധിപതി
+കൊമ്പാർന്നുണരണമൻപിൽ
+തെൻ്റ തുമ്പിൈക്ക ചേർക്കേണം നെഞ്ചിൽ
+വിഘ്നങ്ങൾ വിധി പോലെ തീർക്കേണം മുൻപിൽ
+
+വേദാന്തെപ്പാരുളിൽ ആധാരശിലയേ
+കാരുണ്യക്കടൽ കണ്ട കലികാല പ്രഭുവേ
+കണികാണാൻ മുന്നിൽ ചെലല്ലുമ്പോൾ
+ദുഃഖങ്ങൾ കർപ്പൂരത്തിരിയായ് കത്തുമ്പോൾ
+അയ്യപ്പൻ കളഭച്ചാർത്തണിയാൻ നിൽക്കുമ്പോൾ
+നെയ്യഭിഷകം സ്വാമിക്ക് പാലഭിഷകം സ്വാമിക്ക്
+തിരുവാഭരണം സ്വാമിക്ക് തിരുവമൃതേത്തും സ്വാമിക്ക് (2)`
+            },
+            {
+                title: "Vanamali",
+                lyrics: `വനമാലി വാസുേദവ മനോമോഹന രാധാ രമണ (2)
+മനോമോഹന രാധാ രമണ (2)
+ശശിവദന സരസിജനയന ജഗൻമോഹന രാധാ രമണ (4)
+പാർകടലിൽ പള്ളികൊണ്ട പരന്താമാ രാധാ രമണ
+പരന്താമാ രാധാ രമണ
+ഭക്തർകുൈറ തീർത്തിടുവായ് പരന്താമാ രാധാ രമണ
+
+~Pitch - G
+~Starting singers
+വെണ്ണയുണ്ട മായവനേ കണ്ണാ നീ രാധാ രമണ (2)
+വേണ്ടും വരം തന്തിടുവായ് കണ്ണാ
+കണ്ണാ നീ രാധാ രമണ
+വേണ്ടും വരം തന്തിടുവായ് കണ്ണാ
+കണ്ണാ നീ രാധാ രമണ
+വനമാലി വാസുേദവ മനോമോഹന രാധാ രമണ (2)
+മനോമോഹന രാധാ രമണ (2)
+ശശിവദന സരസിജനയന ജഗൻമോഹന രാധാ രമണ (2)
+രാധാ രമണ രാധാ രമണ.........`
+            },
+            {
+                title: "Pallikattu",
+                lyrics: null
+            },
+            {
+                title: "Muppathimukkodi",
+                lyrics: null
+            },
+            {
+                title: "Sithapathi Rama Chandruki",
+                lyrics: `സീത പതി രാമച്രന്ദ കി ജയ്
+രാധാപതി കൃഷ്ണച്രന്ദ് കി ജയ്
+ഗൗരിപതി ച്രന്ദചൂഡ് കി ജയ്
+പവനസുത ഹനുമാൻ കി ജയ്
+ഗൗരിപു്രത ഗണ നാഥ കി ജയ്
+തപോവാന് ജ്ഞാനാ നന്ത് കി ജയ് (2)
+(സീത പതി)
+
+~BGM Harmonium or flute
+~Pitch - G
+~Starting singers
+വിനര വിനര ശീ രാമുനി ചരിത രാജ രാമുനി ഖനതാ (2)
+നിന്ദ ഭക്തി തോ കൊലിച്ചേ വാരികി റാണിം വടുെയ ഗലത
+സീത പതി രാമച്രന്ദ കി ജയ്
+രാധാപതി കൃഷ്ണച്രന്ദ് കി ജയ്
+ഗൗരിപതി ച്രന്ദചൂഡ് കി ജയ്
+പവനസുത ഹനുമാൻ കി ജയ്
+ഗൗരിപു്രത ഗണ നാഥ കി ജയ്
+തപോവാന് ജ്ഞാനാ നന്ത് കി ജയ് (2)
+
+ഉ്രഗേസനനുക്കി......
+ഉ്രഗേസനനുക്കി ഉന്താ രൂപം കുബ്ജ കുനിക്കിയേ ദന്തം (2)
+ഘന സമ്പത് കി ദൊരകടു രാമുടു സുധാമധാനേമ മാർഗം
+സീത പതി രാമച്രന്ദ കി ജയ്
+രാധാപതി കൃഷ്ണച്രന്ദ് കി ജയ്
+ഗൗരിപതി ച്രന്ദചൂഡ് കി ജയ്
+പവനസുത ഹനുമാൻ കി ജയ്
+ഗൗരിപു്രത ഗണ നാഥ കി ജയ്
+തപോവാന് ജ്ഞാനാ നന്ത് കി ജയ് (2)
+
+രാം അയോദ്ധ്യായ കേ രാജ (2)
+സീത രാമ മേരെ കാണ്ടാക്ക (2)
+സദാ രക്ഷ കേരാ രാമ ച്രന്ദ (2)
+സദാ പ്രേം ഭവ രാമ ച്രന്ദ (2)
+സീത പതി രാമച്രന്ദ കി ജയ്
+രാധാപതി കൃഷ്ണച്രന്ദ് കി ജയ്
+ഗൗരിപതി ച്രന്ദചൂഡ് കി ജയ്
+
+പവനസുത ഹനുമാൻ കി ജയ്
+ഗൗരിപു്രത ഗണ നാഥ കി ജയ്
+തപോവാന് ജ്ഞാനാ നന്ത് കി ജയ് (2)`
+            },
+            {
+                title: "Ramachandraya",
+                lyrics: `~Pitch - C
+~Starting singers
+
+രാമച്രന്ദായ ജനക രാജജാ മേനാഹരായ
+മാമകാഭീഷ്ട ദായ മഹിത മംഗളം (2)
+ലളിതരത്ന കുണ്ഡലായ സുരഭീവന മാലികായ
+ജലജ സദൃശ ദേഹായ ഭാനുമംഗളം (2)
+വിമലരൂപായ വിവിധ വേദാന്ത വേദ്യായ
+സുജനചിത്ത കാമിതായ ശുഭദമംഗളം (2)
+രാമഗാഥ മൃദുലഹൃദയ സാമരസനിവാസായ
+സ്വാമിഭ്രദ ഗിരിവരായ സർവമംഗളം (2)
+രാമച്രന്ദായ ജനക രാജജാ മേനാഹരായ
+മാമകാഭീഷ്ടദായ മഹിത മംഗളം (2)
+മഹിതമംഗളം മഹിതമംഗളം
+
+~Pitch - C
+~Starting singers
+
+രാമച്രന്ദായ ജനക രാജജാ മേനാഹരായ
+മാമകാഭീഷ്ട ദായ മഹിത മംഗളം (2)
+ലളിതരത്ന കുണ്ഡലായ സുരഭീവന മാലികായ
+ജലജ സദൃശ ദേഹായ ഭാനുമംഗളം (2)
+വിമലരൂപായ വിവിധ വേദാന്ത വേദ്യായ
+സുജനചിത്ത കാമിതായ ശുഭദമംഗളം (2)
+രാമഗാഥ മൃദുലഹൃദയ സാമരസനിവാസായ
+സ്വാമിഭ്രദ ഗിരിവരായ സർവമംഗളം (2)
+രാമച്രന്ദായ ജനക രാജജാ മേനാഹരായ
+മാമകാഭീഷ്ടദായ മഹിത മംഗളം (2)
+മഹിതമംഗളം മഹിതമംഗളം`
+            }
+            // ==============================================
+            // ADD MORE BHAJANS BELOW
+            //
+            // WITH LYRICS:
+            //   { title: "Name", lyrics: `line1\nline2...` }
+            //
+            // WITHOUT LYRICS (shows "NO LYRICS" in red):
+            //   { title: "Name", lyrics: null }
+            //
+            // To mark a line as a musical/pitch marking
+            // (shown in a special style), start it with "~":
+            //   `~Pitch - A
+            //    lyric line here`
+            // ==============================================
+        ];
+
+        let fontSize = 26;
+        let lyricsRendered = false;
+
+        // ========= Navigation =========
+        function showHome(e) {
+            if (e) e.preventDefault();
+            document.getElementById('pageHome').style.display = 'block';
+            document.getElementById('pageLyrics').style.display = 'none';
+            window.scrollTo(0, 0);
+            history.replaceState(null, '', '#home');
+        }
+
+        function showSong(index) {
+            const song = bhajans[index];
+            document.getElementById('pageHome').style.display = 'none';
+            document.getElementById('pageLyrics').style.display = 'block';
+            document.getElementById('songTitle').textContent = song.title;
+
+            const container = document.getElementById('lyricsContainer');
+
+            if (song.lyrics === null || song.lyrics === '') {
+                container.innerHTML = '<div class="no-lyrics-box">NO LYRICS AVAILABLE<br><span style="font-size:0.8em;font-weight:400;">Lyrics to be added soon</span></div>';
+                lyricsRendered = false;
+            } else {
+                const lines = song.lyrics.split('\n');
+                let text = '';
+                lines.forEach(line => {
+                    if (line.trim() === '') {
+                        text += '\n';
+                    } else if (line.startsWith('~')) {
+                        text += '__MARKING__' + line.substring(1) + '\n';
+                    } else {
+                        text += line + '\n';
+                    }
+                });
+                container.innerHTML = '<div class="lyrics-text" id="lyricsText"></div>';
+                const lt = document.getElementById('lyricsText');
+                const parts = text.split('\n');
+                let html = '';
+                parts.forEach(p => {
+                    if (p.startsWith('__MARKING__')) {
+                        html += '<span class="marking">' + escapeHtml(p.replace('__MARKING__','')) + '</span>\n';
+                    } else if (p.trim() === '') {
+                        html += '\n';
+                    } else {
+                        html += escapeHtml(p) + '\n';
+                    }
+                });
+                lt.innerHTML = html;
+                lt.style.fontSize = fontSize + 'px';
+                lyricsRendered = true;
+            }
+
+            window.scrollTo(0, 0);
+            history.replaceState(null, '', '#' + index);
+        }
+
+        // ========= Home list =========
+        function renderSongList() {
+            const list = document.getElementById('songList');
+            list.innerHTML = bhajans.map((song, i) => {
+                const noLyrics = (song.lyrics === null || song.lyrics === '') ? '<span class="no-lyrics">⛔ No Lyrics</span>' : '';
+                return `<a class="song-card" href="#${i}" onclick="showSong(${i});return false;">
+                    <span class="num">${i + 1}</span>${escapeHtml(song.title)}${noLyrics}
+                </a>`;
+            }).join('');
+        }
+
+        function filterSongs() {
+            const query = document.getElementById('searchBox').value.toLowerCase();
+            const cards = document.querySelectorAll('.song-card');
+            cards.forEach(card => {
+                card.style.display = card.textContent.toLowerCase().includes(query) ? 'block' : 'none';
+            });
+        }
+
+        // ========= Controls =========
+        function changeFontSize(delta) {
+            fontSize = Math.max(14, Math.min(60, fontSize + delta));
+            document.getElementById('fontSizeDisplay').textContent = fontSize + 'px';
+            const el = document.getElementById('lyricsText');
+            if (el) el.style.fontSize = fontSize + 'px';
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark');
+            const isDark = document.body.classList.contains('dark');
+            document.getElementById('darkModeBtn').textContent = isDark ? '☀️ Light' : '🌙 Dark';
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // ========= Init =========
+        document.addEventListener('DOMContentLoaded', () => {
+            renderSongList();
+            const hash = window.location.hash.replace('#', '');
+            if (hash !== '' && hash !== 'home' && !isNaN(hash)) {
+                showSong(parseInt(hash));
+            } else {
+                showHome();
+            }
+
+            window.addEventListener('scroll', () => {
+                const btn = document.getElementById('scrollTopBtn');
+                btn.classList.toggle('visible', window.scrollY > 400);
+            });
+        });
+    </script>
+</body>
+</html>
